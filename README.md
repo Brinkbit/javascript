@@ -62,7 +62,7 @@
 
     bar = 9;
 
-    console.log(foo, bar); // => 1, 9
+    console.log( foo, bar ); // => 1, 9
     ```
   - [1.2](#1.2) <a name='1.2'></a> **Complex**: When you access a complex type you work on a reference to its value.
 
@@ -76,7 +76,7 @@
 
     bar[0] = 9;
 
-    console.log(foo[0], bar[0]); // => 9, 9
+    console.log( foo[0], bar[0] ); // => 9, 9
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -104,13 +104,13 @@
     ```javascript
     // bad
     var count = 1;
-    if (true) {
+    if ( true ) {
       count += 1;
     }
 
     // good, use the let.
     let count = 1;
-    if (true) {
+    if ( true ) {
       count += 1;
     }
     ```
@@ -123,8 +123,8 @@
       let a = 1;
       const b = 1;
     }
-    console.log(a); // ReferenceError
-    console.log(b); // ReferenceError
+    console.log( a ); // ReferenceError
+    console.log( b ); // ReferenceError
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -183,7 +183,7 @@
 
     ```javascript
 
-    function getKey(k) {
+    function getKey( k ) {
       return `a key named ${k}`;
     }
 
@@ -192,13 +192,13 @@
       id: 5,
       name: 'San Francisco',
     };
-    obj[getKey('enabled')] = true;
+    obj[getKey( 'enabled' )] = true;
 
     // good
     const obj = {
       id: 5,
       name: 'San Francisco',
-      [getKey('enabled')]: true,
+      [getKey( 'enabled' )]: true,
     };
     ```
 
@@ -210,7 +210,7 @@
     const atom = {
       value: 1,
 
-      addValue: function (value) {
+      addValue: function ( value ) {
         return atom.value + value;
       },
     };
@@ -219,7 +219,7 @@
     const atom = {
       value: 1,
 
-      addValue(value) {
+      addValue( value ) {
         return atom.value + value;
       },
     };
@@ -296,7 +296,7 @@
     someStack[someStack.length] = 'abracadabra';
 
     // good
-    someStack.push('abracadabra');
+    someStack.push( 'abracadabra' );
     ```
 
   <a name="es6-array-spreads"></a>
@@ -308,7 +308,7 @@
     const itemsCopy = [];
     let i;
 
-    for (i = 0; i < len; i++) {
+    for ( i = 0; i < len; i++ ) {
       itemsCopy[i] = items[i];
     }
 
@@ -318,8 +318,8 @@
   - [4.4](#4.4) <a name='4.4'></a> To convert an array-like object to an array, use Array#from.
 
     ```javascript
-    const foo = document.querySelectorAll('.foo');
-    const nodes = Array.from(foo);
+    const foo = document.querySelectorAll( '.foo' );
+    const nodes = Array.from( foo );
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -332,7 +332,7 @@
 
     ```javascript
     // bad
-    function getFullName(user) {
+    function getFullName( user ) {
       const firstName = user.firstName;
       const lastName = user.lastName;
 
@@ -340,7 +340,7 @@
     }
 
     // good
-    function getFullName(obj) {
+    function getFullName( obj ) {
       const { firstName, lastName } = obj;
       return `${firstName} ${lastName}`;
     }
@@ -370,7 +370,7 @@
 
     ```javascript
     // bad
-    function processInput(input) {
+    function processInput( input ) {
       // then a miracle occurs
       return [left, right, top, bottom];
     }
@@ -379,13 +379,13 @@
     const [left, __, top] = processInput(input);
 
     // good
-    function processInput(input) {
+    function processInput( input ) {
       // then a miracle occurs
       return { left, right, top, bottom };
     }
 
     // the caller selects only the data they need
-    const { left, right } = processInput(input);
+    const { left, right } = processInput( input );
     ```
 
 
@@ -429,17 +429,17 @@
 
     ```javascript
     // bad
-    function sayHi(name) {
+    function sayHi( name ) {
       return 'How are you, ' + name + '?';
     }
 
     // bad
-    function sayHi(name) {
+    function sayHi( name ) {
       return ['How are you, ', name, '?'].join();
     }
 
     // good
-    function sayHi(name) {
+    function sayHi( name ) {
       return `How are you, ${name}?`;
     }
     ```
@@ -478,17 +478,17 @@
 
     ```javascript
     // bad
-    if (currentUser) {
+    if ( currentUser ) {
       function test() {
-        console.log('Nope.');
+        console.log( 'Nope.' );
       }
     }
 
     // good
     let test;
-    if (currentUser) {
+    if ( currentUser ) {
       test = () => {
-        console.log('Yup.');
+        console.log( 'Yup.' );
       };
     }
     ```
@@ -497,12 +497,12 @@
 
     ```javascript
     // bad
-    function nope(name, options, arguments) {
+    function nope( name, options, arguments ) {
       // ...stuff...
     }
 
     // good
-    function yup(name, options, args) {
+    function yup( name, options, args ) {
       // ...stuff...
     }
     ```
@@ -515,13 +515,13 @@
     ```javascript
     // bad
     function concatenateAll() {
-      const args = Array.prototype.slice.call(arguments);
-      return args.join('');
+      const args = Array.prototype.slice.call( arguments );
+      return args.join( '' );
     }
 
     // good
-    function concatenateAll(...args) {
-      return args.join('');
+    function concatenateAll( ...args ) {
+      return args.join( '' );
     }
     ```
 
@@ -530,7 +530,7 @@
 
     ```javascript
     // really bad
-    function handleThings(opts) {
+    function handleThings( opts ) {
       // No! We shouldn't mutate function arguments.
       // Double bad: if opts is falsy it'll be set to an object which may
       // be what you want but it can introduce subtle bugs.
@@ -539,15 +539,15 @@
     }
 
     // still bad
-    function handleThings(opts) {
-      if (opts === void 0) {
+    function handleThings( opts ) {
+      if ( opts === void 0 ) {
         opts = {};
       }
       // ...
     }
 
     // good
-    function handleThings(opts = {}) {
+    function handleThings( opts = {} ) {
       // ...
     }
     ```
@@ -559,12 +559,12 @@
   ```javascript
   var b = 1;
   // bad
-  function count(a = b++) {
-    console.log(a);
+  function count( a = b++ ) {
+    console.log( a );
   }
   count();  // 1
   count();  // 2
-  count(3); // 3
+  count( 3 ); // 3
   count();  // 3
   ```
 
@@ -574,10 +574,10 @@
 
   ```javascript
   // bad
-  var add = new Function('a', 'b', 'return a + b');
+  var add = new Function( 'a', 'b', 'return a + b' );
 
   // still bad
-  var subtract = Function('a', 'b', 'return a - b');
+  var subtract = Function( 'a', 'b', 'return a - b' );
   ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -592,12 +592,12 @@
 
     ```javascript
     // bad
-    [1, 2, 3].map(function (x) {
+    [1, 2, 3].map( function( x ) {
       return x * x;
     });
 
     // good
-    [1, 2, 3].map((x) => {
+    [1, 2, 3].map( ( x ) => {
       return x * x;
     });
     ```
@@ -610,12 +610,12 @@
 
     ```javascript
     // good
-    [1, 2, 3].map(x => x * x);
+    [1, 2, 3].map( x => x * x );
 
     // good
-    [1, 2, 3].reduce((total, n) => {
+    [1, 2, 3].reduce( ( total, n ) => {
       return total + n;
-    }, 0);
+    }, 0 );
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -629,24 +629,24 @@
 
     ```javascript
     // bad
-    function Queue(contents = []) {
+    function Queue( contents = [] ) {
       this._queue = [...contents];
     }
     Queue.prototype.pop = function() {
       const value = this._queue[0];
-      this._queue.splice(0, 1);
+      this._queue.splice( 0, 1 );
       return value;
     }
 
 
     // good
     class Queue {
-      constructor(contents = []) {
+      constructor( contents = [] ) {
         this._queue = [...contents];
       }
       pop() {
         const value = this._queue[0];
-        this._queue.splice(0, 1);
+        this._queue.splice( 0, 1 );
         return value;
       }
     }
@@ -658,11 +658,11 @@
 
     ```javascript
     // bad
-    const inherits = require('inherits');
-    function PeekableQueue(contents) {
-      Queue.apply(this, contents);
+    const inherits = require( 'inherits' );
+    function PeekableQueue( contents ) {
+      Queue.apply( this, contents );
     }
-    inherits(PeekableQueue, Queue);
+    inherits( PeekableQueue, Queue );
     PeekableQueue.prototype.peek = function() {
       return this._queue[0];
     }
@@ -684,13 +684,13 @@
       return true;
     };
 
-    Jedi.prototype.setHeight = function(height) {
+    Jedi.prototype.setHeight = function( height ) {
       this.height = height;
     };
 
     const luke = new Jedi();
     luke.jump(); // => true
-    luke.setHeight(20); // => undefined
+    luke.setHeight( 20 ); // => undefined
 
     // good
     class Jedi {
@@ -699,7 +699,7 @@
         return this;
       }
 
-      setHeight(height) {
+      setHeight( height ) {
         this.height = height;
         return this;
       }
@@ -708,7 +708,7 @@
     const luke = new Jedi();
 
     luke.jump()
-      .setHeight(20);
+      .setHeight( 20 );
     ```
 
 
@@ -716,7 +716,7 @@
 
     ```javascript
     class Jedi {
-      constructor(options = {}) {
+      constructor( options = {} ) {
         this.name = options.name || 'no name';
       }
 
@@ -741,7 +741,7 @@
 
     ```javascript
     // bad
-    const AirbnbStyleGuide = require('./AirbnbStyleGuide');
+    const AirbnbStyleGuide = require( './AirbnbStyleGuide' );
     module.exports = AirbnbStyleGuide.es6;
 
     // ok
@@ -793,7 +793,7 @@
 
     // bad
     let sum = 0;
-    for (let num of numbers) {
+    for ( let num of numbers ) {
       sum += num;
     }
 
@@ -801,11 +801,11 @@
 
     // good
     let sum = 0;
-    numbers.forEach((num) => sum += num);
+    numbers.forEach( ( num ) => sum += num );
     sum === 15;
 
     // best (use the functional force)
-    const sum = numbers.reduce((total, num) => total + num, 0);
+    const sum = numbers.reduce( ( total, num ) => total + num, 0 );
     sum === 15;
     ```
 
@@ -841,11 +841,11 @@
       age: 28,
     };
 
-    function getProp(prop) {
+    function getProp( prop ) {
       return luke[prop];
     }
 
-    const isJedi = getProp('jedi');
+    const isJedi = getProp( 'jedi' );
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -918,13 +918,13 @@
     // good
     function() {
       test();
-      console.log('doing stuff..');
+      console.log( 'doing stuff..' );
 
       //..other stuff..
 
       const name = getName();
 
-      if (name === 'test') {
+      if ( name === 'test' ) {
         return false;
       }
 
@@ -932,26 +932,26 @@
     }
 
     // bad - unnecessary function call
-    function(hasName) {
+    function( hasName ) {
       const name = getName();
 
-      if (!hasName) {
+      if ( !hasName ) {
         return false;
       }
 
-      this.setFirstName(name);
+      this.setFirstName( name );
 
       return true;
     }
 
     // good
-    function(hasName) {
-      if (!hasName) {
+    function( hasName ) {
+      if ( !hasName ) {
         return false;
       }
 
       const name = getName();
-      this.setFirstName(name);
+      this.setFirstName( name );
 
       return true;
     }
@@ -968,7 +968,7 @@
     // we know this wouldn't work (assuming there
     // is no notDefined global variable)
     function example() {
-      console.log(notDefined); // => throws a ReferenceError
+      console.log( notDefined ); // => throws a ReferenceError
     }
 
     // creating a variable declaration after you
@@ -976,7 +976,7 @@
     // variable hoisting. Note: the assignment
     // value of `true` is not hoisted.
     function example() {
-      console.log(declaredButNotAssigned); // => undefined
+      console.log( declaredButNotAssigned ); // => undefined
       var declaredButNotAssigned = true;
     }
 
@@ -985,14 +985,14 @@
     // which means our example could be rewritten as:
     function example() {
       let declaredButNotAssigned;
-      console.log(declaredButNotAssigned); // => undefined
+      console.log( declaredButNotAssigned ); // => undefined
       declaredButNotAssigned = true;
     }
 
     // using const and let
     function example() {
-      console.log(declaredButNotAssigned); // => throws a ReferenceError
-      console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+      console.log( declaredButNotAssigned ); // => throws a ReferenceError
+      console.log( typeof declaredButNotAssigned ); // => throws a ReferenceError
       const declaredButNotAssigned = true;
     }
     ```
@@ -1001,12 +1001,12 @@
 
     ```javascript
     function example() {
-      console.log(anonymous); // => undefined
+      console.log( anonymous ); // => undefined
 
       anonymous(); // => TypeError anonymous is not a function
 
       var anonymous = function() {
-        console.log('anonymous function expression');
+        console.log( 'anonymous function expression' );
       };
     }
     ```
@@ -1015,26 +1015,26 @@
 
     ```javascript
     function example() {
-      console.log(named); // => undefined
+      console.log( named ); // => undefined
 
       named(); // => TypeError named is not a function
 
       superPower(); // => ReferenceError superPower is not defined
 
       var named = function superPower() {
-        console.log('Flying');
+        console.log( 'Flying' );
       };
     }
 
     // the same is true when the function name
     // is the same as the variable name.
     function example() {
-      console.log(named); // => undefined
+      console.log( named ); // => undefined
 
       named(); // => TypeError named is not a function
 
       var named = function named() {
-        console.log('named');
+        console.log( 'named' );
       }
     }
     ```
@@ -1046,7 +1046,7 @@
       superPower(); // => Flying
 
       function superPower() {
-        console.log('Flying');
+        console.log( 'Flying' );
       }
     }
     ```
@@ -1079,22 +1079,22 @@
 
     ```javascript
     // bad
-    if (name !== '') {
+    if ( name !== '' ) {
       // ...stuff...
     }
 
     // good
-    if (name) {
+    if ( name ) {
       // ...stuff...
     }
 
     // bad
-    if (collection.length > 0) {
+    if ( collection.length > 0 ) {
       // ...stuff...
     }
 
     // good
-    if (collection.length) {
+    if ( collection.length ) {
       // ...stuff...
     }
     ```
@@ -1110,14 +1110,14 @@
 
     ```javascript
     // bad
-    if (test)
+    if ( test )
       return false;
 
     // good
-    if (test) return false;
+    if ( test ) return false;
 
     // good
-    if (test) {
+    if ( test ) {
       return false;
     }
 
@@ -1135,7 +1135,7 @@
 
     ```javascript
     // bad
-    if (test) {
+    if ( test ) {
       thing1();
       thing2();
     }
@@ -1144,7 +1144,7 @@
     }
 
     // good
-    if (test) {
+    if ( test ) {
       thing1();
       thing2();
     } else {
@@ -1167,7 +1167,7 @@
     //
     // @param {String} tag
     // @return {Element} element
-    function make(tag) {
+    function make( tag ) {
 
       // ...stuff...
 
@@ -1182,7 +1182,7 @@
      * @param {String} tag
      * @return {Element} element
      */
-    function make(tag) {
+    function make( tag ) {
 
       // ...stuff...
 
@@ -1202,7 +1202,7 @@
 
     // bad
     function getType() {
-      console.log('fetching type...');
+      console.log( 'fetching type...' );
       // set the default type to 'no type'
       const type = this._type || 'no type';
 
@@ -1211,7 +1211,7 @@
 
     // good
     function getType() {
-      console.log('fetching type...');
+      console.log( 'fetching type...' );
 
       // set the default type to 'no type'
       const type = this._type || 'no type';
@@ -1253,12 +1253,12 @@
 
 ## Whitespace
 
-  - [18.1](#18.1) <a name='18.1'></a> Use soft tabs set to 2 spaces.
+  - [18.1](#18.1) <a name='18.1'></a> Use soft tabs set to 4 spaces.
 
     ```javascript
     // bad
     function() {
-    ∙∙∙∙const name;
+    ∙∙const name;
     }
 
     // bad
@@ -1268,7 +1268,7 @@
 
     // good
     function() {
-    ∙∙const name;
+    ∙∙∙∙const name;
     }
     ```
 
@@ -1277,48 +1277,58 @@
     ```javascript
     // bad
     function test(){
-      console.log('test');
+      console.log( 'test' );
     }
 
     // good
     function test() {
-      console.log('test');
+      console.log( 'test' );
     }
 
     // bad
-    dog.set('attr',{
+    dog.set( 'attr',{
       age: '1 year',
       breed: 'Bernese Mountain Dog',
     });
 
     // good
-    dog.set('attr', {
+    dog.set( 'attr', {
       age: '1 year',
       breed: 'Bernese Mountain Dog',
     });
     ```
 
-  - [18.3](#18.3) <a name='18.3'></a> Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space before the argument list in function calls and declarations.
+  - [18.3](#18.3) <a name='18.3'></a> Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place one space before the argument list in function calls and declarations and one space after. Function calls, object literals, and arrays are an exception to this rule.
 
     ```javascript
     // bad
-    if(isJedi) {
+    if( isJedi ) {
+      fight ();
+    }
+
+    // bad
+    if (isJedi) {
       fight ();
     }
 
     // good
-    if (isJedi) {
+    if ( isJedi ) {
       fight();
     }
 
     // bad
     function fight () {
-      console.log ('Swooosh!');
+      console.log ( 'Swooosh!' );
     }
 
     // good
     function fight() {
-      console.log('Swooosh!');
+      console.log( 'Swooosh!' );
+    }
+
+    // good
+    function fight({ text = 'Swooosh!' }) {
+      console.log(text);
     }
     ```
 
@@ -1336,24 +1346,24 @@
 
     ```javascript
     // bad
-    (function(global) {
+    (function( global ) {
       // ...stuff...
-    })(this);
+    })( this );
     ```
 
     ```javascript
     // bad
-    (function(global) {
+    (function( global ) {
       // ...stuff...
-    })(this);↵
+    })( this );↵
     ↵
     ```
 
     ```javascript
     // good
-    (function(global) {
+    (function( global ) {
       // ...stuff...
-    })(this);↵
+    })( this );↵
     ```
 
   - [18.5](#18.5) <a name='18.5'></a> Use indentation when making long method chains. Use a leading dot, which
@@ -1361,52 +1371,52 @@
 
     ```javascript
     // bad
-    $('#items').find('.selected').highlight().end().find('.open').updateCount();
+    $( '#items' ).find( '.selected' ).highlight().end().find( '.open' ).updateCount();
 
     // bad
-    $('#items').
-      find('.selected').
+    $( '#items' ).
+      find( '.selected' ).
         highlight().
         end().
-      find('.open').
+      find( '.open' ).
         updateCount();
 
     // good
-    $('#items')
-      .find('.selected')
+    $( '#items' )
+      .find( '.selected' )
         .highlight()
         .end()
-      .find('.open')
+      .find( '.open' )
         .updateCount();
 
     // bad
-    const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').class('led', true)
-        .attr('width', (radius + margin) * 2).append('svg:g')
-        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
-        .call(tron.led);
+    const leds = stage.selectAll( '.led' ).data( data ).enter().append( 'svg:svg' ).class( 'led', true )
+        .attr( 'width', ( radius + margin ) * 2 ).append( 'svg:g' )
+        .attr( 'transform', 'translate( ' + (radius + margin) + ',' + (radius + margin) + ')' )
+        .call( tron.led );
 
     // good
-    const leds = stage.selectAll('.led')
-        .data(data)
-      .enter().append('svg:svg')
-        .classed('led', true)
-        .attr('width', (radius + margin) * 2)
-      .append('svg:g')
-        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
-        .call(tron.led);
+    const leds = stage.selectAll( '.led' )
+        .data( data )
+      .enter().append( 'svg:svg' )
+        .classed( 'led', true )
+        .attr( 'width', ( radius + margin ) * 2 )
+      .append( 'svg:g' )
+        .attr( 'transform', 'translate(' + ( radius + margin ) + ',' + ( radius + margin ) + ')' )
+        .call( tron.led );
     ```
 
   - [18.6](#18.6) <a name='18.6'></a> Leave a blank line after blocks and before the next statement.
 
     ```javascript
     // bad
-    if (foo) {
+    if ( foo ) {
       return bar;
     }
     return baz;
 
     // good
-    if (foo) {
+    if ( foo ) {
       return bar;
     }
 
@@ -1579,7 +1589,7 @@
     const totalScore = this.reviewScore + '';
 
     // good
-    const totalScore = String(this.reviewScore);
+    const totalScore = String( this.reviewScore );
     ```
 
   - [21.3](#21.3) <a name='21.3'></a> Use `parseInt` for Numbers and always with a radix for type casting.
@@ -1588,7 +1598,7 @@
     const inputValue = '4';
 
     // bad
-    const val = new Number(inputValue);
+    const val = new Number( inputValue );
 
     // bad
     const val = +inputValue;
@@ -1597,13 +1607,13 @@
     const val = inputValue >> 0;
 
     // bad
-    const val = parseInt(inputValue);
+    const val = parseInt( inputValue );
 
     // good
-    const val = Number(inputValue);
+    const val = Number( inputValue );
 
     // good
-    const val = parseInt(inputValue, 10);
+    const val = parseInt( inputValue, 10 );
     ```
 
   - [21.4](#21.4) <a name='21.4'></a> If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](http://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you're doing.
@@ -1632,10 +1642,10 @@
     const age = 0;
 
     // bad
-    const hasAge = new Boolean(age);
+    const hasAge = new Boolean( age );
 
     // good
-    const hasAge = Boolean(age);
+    const hasAge = Boolean( age );
 
     // good
     const hasAge = !!age;
@@ -1677,7 +1687,7 @@
 
     ```javascript
     // bad
-    function user(options) {
+    function user( options ) {
       this.name = options.name;
     }
 
@@ -1687,7 +1697,7 @@
 
     // good
     class User {
-      constructor(options) {
+      constructor( options ) {
         this.name = options.name;
       }
     }
@@ -1715,7 +1725,7 @@
     function foo() {
       const self = this;
       return function() {
-        console.log(self);
+        console.log( self );
       };
     }
 
@@ -1723,14 +1733,14 @@
     function foo() {
       const that = this;
       return function() {
-        console.log(that);
+        console.log( that );
       };
     }
 
     // good
     function foo() {
       return () => {
-        console.log(this);
+        console.log( this );
       };
     }
     ```
@@ -1791,22 +1801,22 @@
     dragon.getAge();
 
     // bad
-    dragon.age(25);
+    dragon.age( 25 );
 
     // good
-    dragon.setAge(25);
+    dragon.setAge( 25 );
     ```
 
   - [23.3](#23.3) <a name='23.3'></a> If the property is a `boolean`, use `isVal()` or `hasVal()`.
 
     ```javascript
     // bad
-    if (!dragon.age()) {
+    if ( !dragon.age() ) {
       return false;
     }
 
     // good
-    if (!dragon.hasAge()) {
+    if ( !dragon.hasAge() ) {
       return false;
     }
     ```
@@ -1815,16 +1825,16 @@
 
     ```javascript
     class Jedi {
-      constructor(options = {}) {
+      constructor( options = {} ) {
         const lightsaber = options.lightsaber || 'blue';
-        this.set('lightsaber', lightsaber);
+        this.set( 'lightsaber', lightsaber );
       }
 
-      set(key, val) {
+      set( key, val ) {
         this[key] = val;
       }
 
-      get(key) {
+      get( key ) {
         return this[key];
       }
     }
@@ -1839,11 +1849,11 @@
 
     ```javascript
     // bad
-    $(this).trigger('listingUpdated', listing.id);
+    $( this ).trigger( 'listingUpdated', listing.id );
 
     ...
 
-    $(this).on('listingUpdated', function(e, listingId) {
+    $( this ).on( 'listingUpdated', function( e, listingId ) {
       // do something with listingId
     });
     ```
@@ -1852,11 +1862,11 @@
 
     ```javascript
     // good
-    $(this).trigger('listingUpdated', { listingId: listing.id });
+    $( this ).trigger( 'listingUpdated', { listingId: listing.id } );
 
     ...
 
-    $(this).on('listingUpdated', function(e, data) {
+    $( this ).on( 'listingUpdated', function( e, data ) {
       // do something with data.listingId
     });
     ```
@@ -1870,13 +1880,13 @@
 
     ```javascript
     // bad
-    const sidebar = $('.sidebar');
+    const sidebar = $( '.sidebar' );
 
     // good
-    const $sidebar = $('.sidebar');
+    const $sidebar = $( '.sidebar' );
 
     // good
-    const $sidebarBtn = $('.sidebar-btn');
+    const $sidebarBtn = $( '.sidebar-btn' );
     ```
 
   - [25.2](#25.2) <a name='25.2'></a> Cache jQuery lookups.
@@ -1884,18 +1894,18 @@
     ```javascript
     // bad
     function setSidebar() {
-      $('.sidebar').hide();
+      $( '.sidebar' ).hide();
 
       // ...stuff...
 
-      $('.sidebar').css({
+      $( '.sidebar' ).css({
         'background-color': 'pink'
       });
     }
 
     // good
     function setSidebar() {
-      const $sidebar = $('.sidebar');
+      const $sidebar = $( '.sidebar' );
       $sidebar.hide();
 
       // ...stuff...
@@ -1911,19 +1921,19 @@
 
     ```javascript
     // bad
-    $('ul', '.sidebar').hide();
+    $( 'ul', '.sidebar' ).hide();
 
     // bad
-    $('.sidebar').find('ul').hide();
+    $( '.sidebar' ).find( 'ul' ).hide();
 
     // good
-    $('.sidebar ul').hide();
+    $( '.sidebar ul' ).hide();
 
     // good
-    $('.sidebar > ul').hide();
+    $( '.sidebar > ul' ).hide();
 
     // good
-    $sidebar.find('ul').hide();
+    $sidebar.find( 'ul' ).hide();
     ```
 
 **[⬆ back to top](#table-of-contents)**
