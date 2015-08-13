@@ -1,4 +1,5 @@
-# Airbnb JavaScript Style Guide() {
+# A Style Guide Adapted from Airbnb
+> almost exactly the same as [this](https://github.com/airbnb/javascript)
 
 *A mostly reasonable approach to JavaScript*
 
